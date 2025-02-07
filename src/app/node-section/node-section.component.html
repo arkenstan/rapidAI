@@ -1,0 +1,16 @@
+<section class="node-section">
+  <span class="label">{{ data.label }}</span>
+  <br />
+  <span> Input: Position </span>
+
+  <br />
+  <span> Output: Position </span>
+
+  <!-- {{ parentPosition }} -->
+
+  @if (data.hasOutput) {
+  <div class="node-io output"></div>
+  } @if (data.hasInput) {
+  <div class="node-io input"></div>
+  }
+</section>

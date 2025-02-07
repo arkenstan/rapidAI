@@ -1,1 +1,13 @@
-<div class="playground"></div>
+<div class="playground">
+  <h1>Hello</h1>
+
+  @for (node of nodes; track $index) {
+  <app-node
+    [nodeData]="node"
+    cdkDrag
+    (cdkDragMoved)="positionChange($event, node.nodeId)"
+  ></app-node>
+  }
+
+  <svg width="100%" height="100%" viewBox="0 0 1000 1000"></svg>
+</div>

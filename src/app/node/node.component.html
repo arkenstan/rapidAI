@@ -1,0 +1,7 @@
+@if (nodeData) {
+
+{{ nodeData.nodeId }}
+
+@for (section of nodeData.sections; track $index) {
+<app-node-section [data]="section"></app-node-section>
+} }

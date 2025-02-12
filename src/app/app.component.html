@@ -6,6 +6,7 @@
     [nodeData]="node"
     cdkDrag
     (cdkDragMoved)="positionChange($event, node.nodeId)"
+    (cdkDragEnded)="positionEnd($event, node.nodeId)"
   ></app-node>
   }
 

@@ -1,9 +1,11 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   HostBinding,
   HostListener,
   Input,
+  OnInit,
   ViewRef,
 } from '@angular/core';
 import {
@@ -14,6 +16,7 @@ import { PositionSyncService } from '../position-sync.service';
 
 export interface NodeData {
   nodeId: string;
+  position: { x: number; y: number };
   sections: NodeSection[];
 }
 
@@ -23,7 +26,7 @@ export interface NodeData {
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
 })
-export class NodeComponent {
+export class NodeComponent implements OnInit, AfterViewInit {
   @Input() nodeData!: NodeData;
 
   @HostBinding('attr.style') transform: any;
@@ -38,13 +41,18 @@ export class NodeComponent {
     //Add 'implements OnInit' to the class.
 
     this.$positionSync.dragBroadcast.subscribe((res) => {
-      if (res == this.nodeData.nodeId) {
-        this.recalculatePosition();
+      if (res[this.nodeData.nodeId]) {
+        console.log(this.nodeData.nodeId, res[this.nodeData.nodeId]);
       }
     });
   }
 
+  ngAfterViewInit(): void {
+    console.log('Here');
+    this.elem.nativeElement.style.transform = `translate3d(${this.nodeData.position.x}px, ${this.nodeData.position.y}px, 0px)`;
+  }
+
   recalculatePosition() {
-    console.log(this.elem.nativeElement.style.transform);
+    // console.log(this.elem.nativeElement.style.transform);
   }
 }
